@@ -1,6 +1,6 @@
 {
   "name": "sails-generate-ddd",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Sails.js generator to use data-domain-driver",
   "main": "index.js",
   "scripts": {
@@ -25,8 +25,10 @@
   },
   "homepage": "https://github.com/nmrmsys/sails-generate-ddd#readme",
   "dependencies": {
-    "sails-hook-ddd": "~0.0.1"
+    "sails-hook-ddd": "~0.0.1",
+    "lodash": "*",
+    "async": ">=1.2.x",
+    "fs-extra": "*"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

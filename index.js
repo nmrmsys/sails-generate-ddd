@@ -8,10 +8,11 @@
  */
 
 var _ = require('lodash')
-    , path = require('path')
-    , util = require('util')
-    , fs = require('fs-extra')
-    , async = require('async');
+    ,path = require('path')
+    ,util = require('util')
+    ,fs = require('fs-extra')
+    ,async = require('async')
+    ,packageJSON = require('./json/package.json.js');
 
 module.exports = {
 
@@ -25,7 +26,7 @@ module.exports = {
         './.gitignore': { copy: 'gitignore' },
         // './.editorconfig': { copy: 'editorconfig.template' },
         './README.md': { template: 'README.md' },
-        // './package.json': { jsonfile: packageJSON },
+        './package.json': { jsonfile: packageJSON },
         './.sailsrc': { copy: 'sailsrc' },
         // './app.js': { copy: 'app.js' },
         // './.jshintrc': { copy: '.jshintrc' }
@@ -107,7 +108,7 @@ module.exports = {
                             nonFatalErrors.push(symLinkErr);
                         }
                         // but keep going either way.
-                        cb();
+                        // cb();
                     });
                 }]
             },
@@ -126,26 +127,27 @@ module.exports = {
                     cb.log.warn('$ npm install');
                 }
                 return cb();
-            });
-
-            // Make a symlink between the dependency in the sails node_modules folder,
-            // and the new app's node_modules
-            function copyDependency(moduleName) {
-                return function _copyDependency(cb) {
-                    var srcModulePath = path.resolve(scope.sailsRoot, 'node_modules', moduleName);
-                    var destModulePath = path.resolve(scope.rootPath, 'node_modules', moduleName);
-
-                    // Use the "junction" option for Windows
-                    fs.symlink(srcModulePath, destModulePath, 'junction', function (symLinkErr) {
-                        // If a symbolic link fails, push it to the `nonFatalErrors` stack,
-                        if (symLinkErr) {
-                            nonFatalErrors.push(symLinkErr);
-                        }
-                        // but keep going either way.
-                        cb();
-                    });
-                };
             }
+        );
+
+        // Make a symlink between the dependency in the sails node_modules folder,
+        // and the new app's node_modules
+        function copyDependency(moduleName) {
+            return function _copyDependency(cb) {
+                var srcModulePath = path.resolve(scope.sailsRoot, 'node_modules', moduleName);
+                var destModulePath = path.resolve(scope.rootPath, 'node_modules', moduleName);
+
+                // Use the "junction" option for Windows
+                fs.symlink(srcModulePath, destModulePath, 'junction', function (symLinkErr) {
+                    // If a symbolic link fails, push it to the `nonFatalErrors` stack,
+                    if (symLinkErr) {
+                        nonFatalErrors.push(symLinkErr);
+                    }
+                    // but keep going either way.
+                    cb();
+                });
+            };
+        }
 
     }
 
