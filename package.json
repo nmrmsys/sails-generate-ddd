@@ -1,0 +1,32 @@
+{
+  "name": "sails-generate-ddd",
+  "version": "0.0.1",
+  "description": "Sails.js generator to use data-domain-driver",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmrmsys/sails-generate-ddd.git"
+  },
+  "keywords": [
+    "data-domain-driver",
+    "sails",
+    "generate",
+    "sails-generate",
+    "generator",
+    "automation"
+  ],
+  "author": "Masayoshi Nomura <nmrmsys@gmail.com> (http://github.com/nmrmsys)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nmrmsys/sails-generate-ddd/issues"
+  },
+  "homepage": "https://github.com/nmrmsys/sails-generate-ddd#readme",
+  "dependencies": {
+    "sails-hook-ddd": "~0.0.1"
+  },
+  "devDependencies": {
+  }
+}

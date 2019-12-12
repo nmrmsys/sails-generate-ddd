@@ -1,0 +1,11 @@
+{
+  "hooks": {
+    "orm": false,
+    "pubsub": false
+  },
+  "generators": {
+    "modules": {
+      "new": "sails-generate-ddd"
+    }
+  }
+}
